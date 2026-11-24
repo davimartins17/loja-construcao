@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loja de Construção</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <div><h1>Loja de Construção</h1><p>Sistema simples de gerenciamento</p></div>
+    <button id="sairBtn" class="secondary hidden" onclick="sair()">Sair</button>
+  </header>
+
+  <main>
+    <section id="loginSection" class="panel login">
+      <h2>Acessar o sistema</h2>
+      <form id="loginForm">
+        <label>E-mail<input id="email" type="email" required placeholder="seu@email.com"></label>
+        <label>Senha<input id="senha" type="password" required placeholder="Sua senha"></label>
+        <button type="submit">Entrar</button>
+      </form>
+      <p class="hint">Ainda não tem usuário? <button class="link" onclick="mostrarCadastro()">Fazer cadastro</button></p>
+      <form id="cadastroForm" class="hidden">
+        <h3>Criar usuário</h3>
+        <label>Nome<input id="cadNome" required></label>
+        <label>E-mail<input id="cadEmail" type="email" required></label>
+        <label>Senha (mínimo 8 caracteres)<input id="cadSenha" type="password" minlength="8" required></label>
+        <button type="submit">Cadastrar</button>
+      </form>
+      <p id="loginMsg" class="message"></p>
+    </section>
+
+    <section id="appSection" class="hidden">
+      <div class="welcome"><h2>Painel de controle</h2><span id="usuarioLogado"></span></div>
+      <nav>
+        <button class="tab active" onclick="aba('produtos', this)">Produtos</button>
+        <button class="tab" onclick="aba('categorias', this)">Categorias</button>
+        <button class="tab" onclick="aba('fornecedores', this)">Fornecedores</button>
+      </nav>
+
+      <section id="produtos" class="panel">
+        <h2>Produtos</h2>
+        <form id="produtoForm" class="form-grid">
+          <input type="hidden" id="produtoId">
+          <label>Nome<input id="produtoNome" required></label>
+          <label>Preço (R$)<input id="produtoPreco" type="number" min="0.01" step="0.01" required></label>
+          <label>Estoque<input id="produtoEstoque" type="number" min="0" step="1" required></label>
+          <label>Categoria<select id="produtoCategoria" required></select></label>
+          <label>Fornecedor<select id="produtoFornecedor"><option value="">Sem fornecedor</option></select></label>
+          <label class="wide">Descrição<input id="produtoDescricao"></label>
+          <div class="actions wide"><button type="submit">Salvar produto</button><button type="button" class="secondary" onclick="limparProduto()">Limpar</button></div>
+        </form>
+        <p id="produtoMsg" class="message"></p>
+        <div class="table-wrap"><table><thead><tr><th>Nome</th><th>Preço</th><th>Estoque</th><th>Categoria</th><th>Ações</th></tr></thead><tbody id="produtosTabela"></tbody></table></div>
+      </section>
+
+      <section id="categorias" class="panel hidden">
+        <h2>Categorias</h2>
+        <form id="categoriaForm" class="form-grid">
+          <input type="hidden" id="categoriaId">
+          <label>Nome<input id="categoriaNome" required></label>
+          <label>Descrição<input id="categoriaDescricao"></label>
+          <div class="actions"><button type="submit">Salvar categoria</button><button type="button" class="secondary" onclick="limparCategoria()">Limpar</button></div>
+        </form>
+        <p id="categoriaMsg" class="message"></p>
+        <div class="table-wrap"><table><thead><tr><th>Nome</th><th>Descrição</th><th>Ações</th></tr></thead><tbody id="categoriasTabela"></tbody></table></div>
+      </section>
+
+      <section id="fornecedores" class="panel hidden">
+        <h2>Fornecedores</h2>
+        <form id="fornecedorForm" class="form-grid">
+          <input type="hidden" id="fornecedorId">
+          <label>Nome<input id="fornecedorNome" required></label>
+          <label>CNPJ<input id="fornecedorCnpj"></label>
+          <label>Telefone<input id="fornecedorTelefone"></label>
+          <label>E-mail<input id="fornecedorEmail" type="email"></label>
+          <div class="actions"><button type="submit">Salvar fornecedor</button><button type="button" class="secondary" onclick="limparFornecedor()">Limpar</button></div>
+        </form>
+        <p id="fornecedorMsg" class="message"></p>
+        <div class="table-wrap"><table><thead><tr><th>Nome</th><th>CNPJ</th><th>Telefone</th><th>E-mail</th><th>Ações</th></tr></thead><tbody id="fornecedoresTabela"></tbody></table></div>
+      </section>
+    </section>
+  </main>
+  <script src="/script.js"></script>
+</body>
+</html>
